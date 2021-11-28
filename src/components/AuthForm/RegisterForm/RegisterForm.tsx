@@ -126,8 +126,8 @@ function RegisterForm({
                 variant="outlined"
                 required
                 fullWidth
-                id="password"
-                name="password"
+                id="confirm-password"
+                name="confirm-password"
                 value={confirmPassword}
                 onChange={(e) => setFieldValue('confirmPassword', e.target.value)}
                 label="Confirm Password"
