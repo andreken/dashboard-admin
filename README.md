@@ -1,4 +1,4 @@
-# Dasboard admin
+# Dashboard admin
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -6,10 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Features
 
 There are four different routes:
-- /login (public): let users sign in to view the dashboard page
-- /register (public): let users create a new account to have access to the dashboard page
-- / (private): visible only after login. On page load, a random list of todos will be fetched by a public api and rendered on screen
-- /photos (private): visible only after login. On page load, a random list of pictures will be fetched by a public api and rendered on screen
+- `/login` (public): let users sign in to view the dashboard page
+- `/register` (public): let users create a new account to have access to the dashboard page
+- `/` (private): visible only after login. On page load, a random list of todos will be fetched by a public api and rendered on screen
+- `/photos` (private): visible only after login. On page load, a random list of pictures will be fetched by a public api and rendered on screen
 
 When route is not found (because it's not included in these four) an error page will be render.
 
