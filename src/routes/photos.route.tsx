@@ -1,8 +1,8 @@
 import React from 'react'
-import DashboardPage from '../containers/DashboardPage'
+import PhotosSection from '../components/Dashboard/Content/Photos'
 
 const PhotosRoute = () => {
-  return <DashboardPage section='photos' />
+  return <PhotosSection />
 }
 
 export default PhotosRoute

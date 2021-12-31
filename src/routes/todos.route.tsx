@@ -1,8 +1,8 @@
 import React from 'react'
-import DashboardPage from '../containers/DashboardPage'
+import TodosSection from '../components/Dashboard/Content/Todos'
 
 const TodosRoute = () => {
-  return <DashboardPage section='todos' />
+  return <TodosSection />
 }
 
 export default TodosRoute

@@ -16,7 +16,7 @@ const registerPath = '/register'
 const todosPath = '/'
 const photosPath = '/photos'
 
-export default (
+const Routes = () => (
   <Suspense fallback={(<Loading />)}>
     <Router history={history}>
       <Switch>
@@ -29,3 +29,5 @@ export default (
     </Router>
   </Suspense>
 )
+
+export default Routes

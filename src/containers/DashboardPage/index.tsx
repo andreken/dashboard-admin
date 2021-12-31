@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -12,10 +12,11 @@ import { history } from "../../redux";
 export type TSection = 'todos' | 'photos'
 
 interface IProps {
+  children: ReactNode
   section: TSection
 }
 
-const DashboardPage = ({ section = 'todos' }: IProps) => {
+const DashboardPage = ({ children = null, section = 'todos' }: IProps) => {
 
   const [user, loading] = useAuthState(auth);
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const DashboardPage = ({ section = 'todos' }: IProps) => {
 
   return (
     <Dashboard
+      children={children}
       section={section}
       loading={loading}
       userData={userData}
