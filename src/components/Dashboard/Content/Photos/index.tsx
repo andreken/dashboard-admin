@@ -4,7 +4,6 @@ import { Grid, Skeleton } from '@mui/material';
 
 import { fetchPhotos } from '../../../../redux/api';
 import { selectPhotosFetchStarted, selectPhotosFetchSuccess, selectPhotosList } from '../../../../redux/selectors';
-import DashboardPage from '../../../../containers/DashboardPage';
 
 const limit = 24
 
@@ -22,7 +21,6 @@ const Posts = () => {
   }, [dispatch, fetchSuccess])
   
   return (
-    <DashboardPage section='photos'>
       <Grid container spacing={2}>
         {
           fetchSuccess && photosList.map(photo => (
@@ -39,7 +37,6 @@ const Posts = () => {
           ))
         }
       </Grid>
-    </DashboardPage>
   )
 }
 

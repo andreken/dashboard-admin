@@ -1,17 +1,21 @@
-import React, { ReactNode } from "react";
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import React from "react";
+import { Switch, Route } from 'react-router-dom'
+import { Box, Toolbar } from '@mui/material';
 
-interface IProps {
-  children: ReactNode
-}
+import { PHOTOS_PATH, TODOS_PATH } from "../../../utils/const";
 
-const Content = ({ children }: IProps) => {
+const Todos = React.lazy(() => import('../Content/Todos'))
+const Photos = React.lazy(() => import('../Content/Photos'))
+
+const Content = () => {
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <Toolbar />
-      { children }
+      <Switch>
+        <Route exact path={TODOS_PATH} component={Todos} />
+        <Route exact path={PHOTOS_PATH} component={Photos} />
+      </Switch>
     </Box>
   );
 }

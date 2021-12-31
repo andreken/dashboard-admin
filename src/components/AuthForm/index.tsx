@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import { useAuthState } from "react-firebase-hooks/auth";
+
 import { auth } from "../../database";
 import { history } from '../../redux'
+import { DASHBOARD_PATH } from '../../utils/const'
 
 import { TForm } from '../../containers/AuthPage'
 import LoginForm from './LoginForm';
@@ -18,7 +20,7 @@ const AuthForm = ({ form }: IProps) => {
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    if(user) history.push('/')
+    if(user) history.push(DASHBOARD_PATH)
   }, [user])
 
   const Form = form === 'login' ? LoginForm : RegisterForm;

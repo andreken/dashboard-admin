@@ -1,33 +1,40 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { ConnectedRouter as Router } from 'connected-react-router'
+import { useDispatch } from "react-redux";
+import { ConnectedRouter as Router, push } from 'connected-react-router'
 
 import { history } from '../redux'
+import { LOGIN_PATH, REGISTER_PATH, DASHBOARD_PATHS } from '../utils/const'
 import CustomRoute from '../components/CustomRoute'
 import Loading from '../components/Loading'
 
 const Login = React.lazy(() => import('./login.route'))
 const Register = React.lazy(() => import('./register.route'))
-const Todos = React.lazy(() => import('./todos.route'))
-const Photos = React.lazy(() => import('./photos.route'))
+const Dashboard = React.lazy(() => import('./dashboard.route'))
 const NotFound = React.lazy(() => import('./notFound.route'))
-const loginPath = '/login'
-const registerPath = '/register'
-const todosPath = '/'
-const photosPath = '/photos'
 
-const Routes = () => (
-  <Suspense fallback={(<Loading />)}>
-    <Router history={history}>
-      <Switch>
-        <CustomRoute exact path={loginPath} component={Login} />
-        <CustomRoute exact path={registerPath} component={Register} />
-        <CustomRoute exact path={todosPath} component={Todos} isPrivate />
-        <CustomRoute exact path={photosPath} component={Photos} isPrivate />
-        <Route component={NotFound} />
-      </Switch>
-    </Router>
-  </Suspense>
-)
+const Routes = () => {
+
+  const dispatch = useDispatch()
+
+  // Manually dispatch action at first render
+  // fix initial pathname value in redux state
+  useEffect(() => {
+    dispatch(push({ pathname: window.location.pathname }))
+  }, [dispatch])
+
+  return (
+    <Suspense fallback={(<Loading />)}>
+      <Router history={history}>
+        <Switch>
+          <CustomRoute exact path={LOGIN_PATH} component={Login} />
+          <CustomRoute exact path={REGISTER_PATH} component={Register} />
+          <CustomRoute exact path={DASHBOARD_PATHS} component={Dashboard} isPrivate />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </Suspense>
+  )
+}
 
 export default Routes

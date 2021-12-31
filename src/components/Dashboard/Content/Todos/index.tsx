@@ -11,7 +11,6 @@ import { green, red } from '@mui/material/colors';
 
 import { fetchTodos } from '../../../../redux/api';
 import { selectTodosFetchStarted, selectTodosFetchSuccess, selectTodosList } from '../../../../redux/selectors';
-import DashboardPage from '../../../../containers/DashboardPage';
 
 const limit = 20
 
@@ -29,7 +28,6 @@ const Todos = () => {
   }, [dispatch, fetchSuccess])
   
   return (
-    <DashboardPage section='todos'>
       <List sx={{ width: '100%', maxWidth: 600 }}>
         {
           fetchSuccess && todosList.map(todo => (
@@ -54,7 +52,6 @@ const Todos = () => {
           ))
         }
       </List>
-    </DashboardPage>
   )
 }
 

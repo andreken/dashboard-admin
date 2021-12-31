@@ -1,21 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { 
+import { useSelector } from "react-redux";
+import {
   Drawer, Box, Toolbar,
   List, ListItem, ListItemIcon, ListItemText,
 } from '@mui/material';
-import TaskIcon from '@mui/icons-material/Task';
-import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import {
+  Task as TaskIcon,
+  PhotoLibrary as PhotoLibraryIcon,
+} from '@mui/icons-material';
 
-import { TSection } from '../../../containers/DashboardPage'
-
-interface IProps {
-  section: TSection
-}
+import { selectPathname } from "../../../redux/selectors/router.selectors";
+import { PHOTOS_PATH, TODOS_PATH } from "../../../utils/const";
 
 const drawerWidth = 200;
 
-const Sidebar = ({ section }: IProps) => {
+const Sidebar = () => {
+
+  const pathname = useSelector(selectPathname)
 
   return (
     <Drawer
@@ -29,13 +31,13 @@ const Sidebar = ({ section }: IProps) => {
       <Toolbar />
       <Box sx={{ overflow: 'auto' }}>
         <List>
-          <ListItem selected={section === 'todos'} button key='todos' component={Link} to='/'>
+          <ListItem selected={pathname === TODOS_PATH} button key={TODOS_PATH} component={Link} to={TODOS_PATH}>
             <ListItemIcon>
               <TaskIcon />
             </ListItemIcon>
             <ListItemText primary='Todos' />
           </ListItem>
-          <ListItem selected={section === 'photos'} button key='photos' component={Link} to='/photos'>
+          <ListItem selected={pathname === PHOTOS_PATH} button key={PHOTOS_PATH} component={Link} to={PHOTOS_PATH}>
             <ListItemIcon>
               <PhotoLibraryIcon />
             </ListItemIcon>
