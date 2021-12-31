@@ -20,7 +20,7 @@ const Routes = () => {
   // Manually dispatch action at first render
   // fix initial pathname value in redux state
   useEffect(() => {
-    dispatch(push({ pathname: window.location.pathname }))
+    dispatch(push({ pathname: history.location.pathname }))
   }, [dispatch])
 
   return (
