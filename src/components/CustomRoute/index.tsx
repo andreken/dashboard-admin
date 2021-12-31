@@ -4,12 +4,20 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../database";
 import Loading from '../Loading'
 
-const  PrivateRoute: React.FC<{
+interface IProps {
   component: React.ComponentType<any>;
   path: string;
+  isPrivate?: boolean;
   exact?: boolean;
   componentProps?: any;
-}> = ({ component, componentProps, ...rest }) => {
+}
+
+const CustomRoute: React.FC<IProps> = ({
+  component,
+  isPrivate = false,
+  componentProps,
+  ...rest
+}) => {
 
   const ComponentToRender = component;
   const [user, loading] = useAuthState(auth);
@@ -19,7 +27,7 @@ const  PrivateRoute: React.FC<{
     !loading ?
     <Route 
       {...rest} 
-      render={(props) => userHasAccess ?
+      render={(props) => userHasAccess || !isPrivate ?
         <ComponentToRender {...props} {...componentProps} /> :
         <Redirect to={{ pathname: '/login', state: {from: props.location} }} />
       }
@@ -28,4 +36,4 @@ const  PrivateRoute: React.FC<{
 
 };
 
-export  default  PrivateRoute;
+export default CustomRoute;

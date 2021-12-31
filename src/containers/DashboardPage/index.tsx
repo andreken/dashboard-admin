@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -21,14 +21,7 @@ const DashboardPage = ({ section = 'todos' }: IProps) => {
   const dispatch = useDispatch();
   const userData = useSelector(selectUser)
 
-  useEffect(() => {
-    if (loading) return;
-    if (!user) return history.push('/login')
-    fetchUserData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, loading]);  // fetchUserData doesn't change
-
-  const fetchUserData = async () => {
+  const memoFetchUserData = useCallback(async () => {
     try {
       if(!user) return
       const userData = await getUser(user.uid)
@@ -38,7 +31,13 @@ const DashboardPage = ({ section = 'todos' }: IProps) => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return history.push('/login')
+    memoFetchUserData();
+  }, [user, loading, memoFetchUserData]);
 
   const handleLogout = () => {
     dispatch(logout())

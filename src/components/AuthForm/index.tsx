@@ -15,12 +15,11 @@ interface IProps {
 
 const AuthForm = ({ form }: IProps) => {
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
-    if(loading) { return }
     if(user) history.push('/')
-  }, [user, loading, error])
+  }, [user])
 
   const Form = form === 'login' ? LoginForm : RegisterForm;
 
